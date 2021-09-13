@@ -22,7 +22,8 @@ contract('Verifier', accounts => {
         })
 
         it('correct proof', async function () {
-          let result = await this.contract.verifyTx.call(json.proof.a,json.proof.b,json.proof.c, json.inputs);
+          let result = await this.contract.verifyTx.call(json.proof.a,json.proof.a_p,json.proof.b,json.proof.b_p,json.proof.c,json.proof.c_p,json.proof.h,json.proof.k,json.inputs);
+          //let result = await this.contract.verifyTx.call(json.proof.a,json.proof.b,json.proof.c, json.inputs);
           assert.equal(result,true,"proof is invalid")
         })
 
@@ -49,7 +50,8 @@ contract('Verifier', accounts => {
              '0x0000000000000000000000000000000000000000000000000000000000000001' ] 
 		 }
 
-          let result = await this.contract.verifyTx.call(json.proof.a,json.proof.b,json.proof.c,[9,0])
+          let result = await this.contract.verifyTx.call(json.proof.a,json.proof.a_p,json.proof.b,json.proof.b_p,json.proof.c,json.proof.c_p,json.proof.h,json.proof.k,[9,0])
+          //let result = await this.contract.verifyTx.call(json.proof.a,json.proof.b,json.proof.c,[9,0])
           //let result = await this.contract.verifyTx.call(errorJson.proof.a,errorJson.proof.b,errorJson.proof.c,errorJson.inputs)
           assert.equal(result,false,"proof is invalid")
 

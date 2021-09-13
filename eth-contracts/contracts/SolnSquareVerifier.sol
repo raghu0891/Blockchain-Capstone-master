@@ -36,13 +36,15 @@ struct Solution {
 
 
 // TODO Create a function to add the solutions to the array and emit the event
-  function addSolution(uint[2] memory a,uint[2][2] memory b,uint[2] memory c,uint[2] memory input)
+  function addSolution(uint[2] memory a,uint[2] memory a_p, uint[2][2] memory b,uint[2][2] memory b_p, uint[2] memory c,uint[2] memory c_p,uint[2] memory h,uint[2] memory k,uint[2] memory input)
+  //function addSolution(uint[2] memory a,uint[2][2] memory b,uint[2] memory c,uint[2] memory input)
       public
   {
       bytes32 solutionHash = keccak256(abi.encodePacked(input[0], input[1]));
       require(solutions[solutionHash].solutionExists == false, "Solution exists already");
 
-      bool verified = verifierContract.verifyTx(a,b,c, input);
+      bool verified = verifierContract.verifyTx(a,a_p,b,b_p,c,c_p,h,k, input);
+      //bool verified = verifierContract.verifyTx(a,b,c, input);
       require(verified, "Solution could not be verified");
 
 
@@ -74,8 +76,13 @@ struct Solution {
 	contract renVerifier {
     		function verifyTx(
       			uint[2] memory a,
+      			uint[2] memory a_p,
       			uint[2][2] memory b,
+      			uint[2][2] memory b_p,
       			uint[2] memory c,
+      			uint[2] memory c_p,
+      			uint[2] memory h,
+      			uint[2] memory k,
       			uint[2] memory input
     		)
 		public
